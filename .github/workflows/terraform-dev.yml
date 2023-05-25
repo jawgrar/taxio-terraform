@@ -19,6 +19,7 @@ env:
   TF_VAR_web_app_display_name: ${{ vars.FIREBASE_WEB_DISPLAY_NAME }}
   TF_VAR_firebase_region_name: ${{ vars.FIREBASE_REGION_NAME }}
   FIREBASE_SERVICE_ACCOUNT_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
+  TF_VAR_credentials_file: "service-account-key-dev.json"
   
 jobs:
   terraform:
@@ -42,7 +43,7 @@ jobs:
     
     # generate firebase auth file
     - name: Set Firebase Service Account Key
-      run: echo "$FIREBASE_SERVICE_ACCOUNT_KEY" > service-account-key.json
+      run: echo "$FIREBASE_SERVICE_ACCOUNT_KEY" > service-account-key-dev.json
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
