@@ -18,7 +18,6 @@ env:
   TF_VAR_ios_app_bundle_id: ${{ vars.FIREBASE_IOS_BUNDLE_ID }}
   TF_VAR_web_app_display_name: ${{ vars.FIREBASE_WEB_DISPLAY_NAME }}
   TF_VAR_firebase_region_name: ${{ vars.FIREBASE_REGION_NAME }}
-  #TF_VAR_credentials_file: "service-account-key-dev.json"
   
 jobs:
   terraform:
@@ -39,17 +38,12 @@ jobs:
     - name: 'Authenticate to Google Cloud'
       uses: 'google-github-actions/auth@v1'
       with:
-        #service_account: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_EMAIL }}
         credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
         
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
     
-    # generate firebase auth file
-    #- name: Set Firebase Service Account Key
-    #  run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}" > service-account-key-dev.json
-
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: terraform init
