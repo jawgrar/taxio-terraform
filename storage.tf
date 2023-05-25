@@ -1,14 +1,14 @@
 # Provisions the default Cloud Storage bucket for the project via Google App Engine.
 resource "google_app_engine_application" "default" {
-  provider    = google-beta
-  project     = google_project.default.project_id
+  provider = google-beta
+  project  = google_project.default.project_id
   # See available locations: https://firebase.google.com/docs/projects/locations#default-cloud-location
   # This will set the location for the default Storage bucket and the App Engine App.
   location_id = var.firebase_region_name
 
   #If you use Firestore, uncomment this to make sure Firestore is provisioned first.
   depends_on = [
-    google_firestore_database.default
+    google_firestore_database.default,
   ]
 }
 

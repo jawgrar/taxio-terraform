@@ -1,13 +1,13 @@
 # Provisions the Firestore database instance.
 resource "google_firestore_database" "default" {
-  provider                    = google-beta
-  project                     = google_project.default.project_id
-  name                        = "(default)"
+  provider = google-beta
+  project  = google_project.default.project_id
+  name     = "(default)"
   # See available locations: https://firebase.google.com/docs/projects/locations#default-cloud-location
-  location_id                 = var.firebase_region_name
+  location_id = var.firebase_region_name
   # "FIRESTORE_NATIVE" is required to use Firestore with Firebase SDKs, authentication, and Firebase Security Rules.
-  type                        = "FIRESTORE_NATIVE"
-  concurrency_mode            = "OPTIMISTIC"
+  type             = "FIRESTORE_NATIVE"
+  concurrency_mode = "OPTIMISTIC"
 
   # Wait for Firebase to be enabled in the Google Cloud project before initializing Firestore.
   depends_on = [
@@ -37,7 +37,7 @@ resource "google_firebaserules_ruleset" "default" {
 # Releases the ruleset for the Firestore instance.
 resource "google_firebaserules_release" "default" {
   provider     = google-beta
-  name         = "cloud.firestore"  # must be cloud.firestore
+  name         = "cloud.firestore" # must be cloud.firestore
   ruleset_name = google_firebaserules_ruleset.default.name
   project      = google_project.default.project_id
 

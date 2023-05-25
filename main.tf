@@ -17,7 +17,7 @@ provider "google-beta" {
 # Configures the provider to not use the resource block's specified project for quota checks.
 # This provider should only be used during project creation and initializing services.
 provider "google-beta" {
-  alias = "no_user_project_override"
+  alias                 = "no_user_project_override"
   user_project_override = false
 }
 
@@ -43,10 +43,10 @@ resource "google_project_service" "default" {
   for_each = toset([
     "cloudbilling.googleapis.com",
     "cloudresourcemanager.googleapis.com",
+    "firebase.googleapis.com",
     # Enabling the ServiceUsage API allows the new project to be quota checked from now on.
     "serviceusage.googleapis.com",
     "identitytoolkit.googleapis.com",
-    "firebase.googleapis.com",
     "firestore.googleapis.com",
     "firebaserules.googleapis.com",
     "firebasestorage.googleapis.com",
