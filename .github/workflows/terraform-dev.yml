@@ -3,7 +3,6 @@ name: 'Terraform'
 on:
   push:
     branches: [ "master" ]
-  pull_request:
 
 permissions:
   contents: read
@@ -20,11 +19,6 @@ env:
   TF_VAR_web_app_display_name: ${{ vars.FIREBASE_WEB_DISPLAY_NAME }}
   TF_VAR_firebase_region_name: ${{ vars.FIREBASE_REGION_NAME }}
   FIREBASE_SERVICE_ACCOUNT_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
-
-  # q: how to set make sure vars.FIREBASE_PROJECT_NAME is used from dev environment?
-  # a: https://docs.github.com/en/actions/reference/encrypted-secrets#using-encrypted-secrets-in-a-workflow
-
-  
   
 jobs:
   terraform:
@@ -57,13 +51,17 @@ jobs:
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
       run: terraform fmt -check
+      
+    # validate that all Terraform configuration files adhere to a canonical format
+    - name: Terraform Validate
+      run: terraform validate #-input=false
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      run: terraform plan -input=false
+      run: terraform plan #-input=false
 
       # On push to "master", build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply
       if: github.ref == 'refs/heads/"master"' && github.event_name == 'push'
-      run: terraform apply -auto-approve -input=false
+      run: terraform apply -auto-approve #-input=false
