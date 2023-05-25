@@ -43,8 +43,3 @@ variable "firebase_region_name" {
   description = "Region for the Firebase project"
   type        = string
 }
-
-variable "folder_id" {
-  description = "ID of the folder to create the project in"
-  type        = string
-}
