@@ -1,5 +1,5 @@
 variable "project_name" {
-  description = "Name of the Google Cloud project"
+  description = "Name of the Google Cloud project 2"
   type        = string
   default     = "Taxio Dev v1"
 }
