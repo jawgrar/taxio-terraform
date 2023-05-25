@@ -10,16 +10,21 @@ permissions:
 
 env:
   TF_ACTION_WORKING_DIR: './terraform'
-  TF_VAR_project_name: ${{ env.FIREBASE_PROJECT_NAME }}
-  TF_VAR_project_id: ${{ env.FIREBASE_PROJECT_ID }}
+  TF_VAR_project_name: ${{ vars.FIREBASE_PROJECT_NAME }}
+  TF_VAR_project_id: ${{ vars.FIREBASE_PROJECT_ID }}
   TF_VAR_billing_account: ${{ secrets.GCP_BILLING_ACCOUNT }}
-  TF_VAR_android_app_display_name: ${{ env.FIREBASE_ANDROID_DISPLAY_NAME }}
-  TF_VAR_android_app_package_name: ${{ env.FIREBASE_ANDROID_PACKAGE_NAME }}
-  TF_VAR_ios_app_display_name: ${{ env.FIREBASE_IOS_DISPLAY_NAME }}
-  TF_VAR_ios_app_bundle_id: ${{ env.FIREBASE_IOS_BUNDLE_ID }}
-  TF_VAR_web_app_display_name: ${{ env.FIREBASE_WEB_DISPLAY_NAME }}
-  TF_VAR_firebase_region_name: ${{ env.FIREBASE_REGION_NAME }}
+  TF_VAR_android_app_display_name: ${{ vars.FIREBASE_ANDROID_DISPLAY_NAME }}
+  TF_VAR_android_app_package_name: ${{ vars.FIREBASE_ANDROID_PACKAGE_NAME }}
+  TF_VAR_ios_app_display_name: ${{ vars.FIREBASE_IOS_DISPLAY_NAME }}
+  TF_VAR_ios_app_bundle_id: ${{ vars.FIREBASE_IOS_BUNDLE_ID }}
+  TF_VAR_web_app_display_name: ${{ vars.FIREBASE_WEB_DISPLAY_NAME }}
+  TF_VAR_firebase_region_name: ${{ vars.FIREBASE_REGION_NAME }}
   FIREBASE_SERVICE_ACCOUNT_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
+
+  # q: how to set make sure vars.FIREBASE_PROJECT_NAME is used from dev environment?
+  # a: https://docs.github.com/en/actions/reference/encrypted-secrets#using-encrypted-secrets-in-a-workflow
+
+  
   
 jobs:
   terraform:
