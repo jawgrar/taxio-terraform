@@ -43,13 +43,14 @@ resource "google_project_service" "default" {
   for_each = toset([
     "cloudbilling.googleapis.com",
     "cloudresourcemanager.googleapis.com",
-    "firebase.googleapis.com",
     # Enabling the ServiceUsage API allows the new project to be quota checked from now on.
     "serviceusage.googleapis.com",
     "identitytoolkit.googleapis.com",
+    "firebase.googleapis.com",
     "firestore.googleapis.com",
     "firebaserules.googleapis.com",
-
+    "firebasestorage.googleapis.com",
+    "storage.googleapis.com",
   ])
   service = each.key
 
