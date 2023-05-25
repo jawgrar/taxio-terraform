@@ -39,7 +39,7 @@ jobs:
     - name: 'Authenticate to Google Cloud'
       uses: 'google-github-actions/auth@v1'
       with:
-        #service_account_email: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_EMAIL }}
+        #service_account: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_EMAIL }}
         credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
         
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
