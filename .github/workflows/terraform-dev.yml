@@ -2,7 +2,7 @@ name: 'Terraform'
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ master ]
 
 permissions:
   contents: read
