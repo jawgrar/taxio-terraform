@@ -9,7 +9,6 @@ permissions:
   contents: read
 
 env:
-  TF_ACTION_WORKING_DIR: './terraform'
   TF_VAR_project_name: ${{ vars.FIREBASE_PROJECT_NAME }}
   TF_VAR_project_id: ${{ vars.FIREBASE_PROJECT_ID }}
   TF_VAR_billing_account: ${{ secrets.GCP_BILLING_ACCOUNT }}
