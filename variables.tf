@@ -43,3 +43,8 @@ variable "firebase_region_name" {
   description = "Region for the Firebase project"
   type        = string
 }
+
+variable "credentials_file" {
+  description = "Path to the credentials file for the Google Cloud project"
+  type        = string
+}

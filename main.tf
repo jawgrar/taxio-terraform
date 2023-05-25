@@ -8,9 +8,16 @@ terraform {
   }
 }
 
+
 # Configures the provider to use the resource block's specified project for quota checks.
 provider "google-beta" {
   user_project_override = true
+}
+
+# configure the provider to use GOOGLE_APPLICATION_CREDENTIALS json file to authenticate
+provider "google-beta" {
+  alias = "service_account_key"
+  credentials = file(var.credentials_file)
 }
 
 # Configures the provider to not use the resource block's specified project for quota checks.
