@@ -1,7 +1,6 @@
 variable "project_name" {
   description = "Name of the Google Cloud project 2"
   type        = string
-  default     = "Taxio Dev v1"
 }
 
 # TODO: ensure the id is unique and available
