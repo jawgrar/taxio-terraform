@@ -8,33 +8,39 @@ terraform {
   }
 }
 
-
 # Configures the provider to use the resource block's specified project for quota checks.
 provider "google-beta" {
+  project = var.project_id  # Use your existing project ID here
   user_project_override = true
 }
 
-# Configures the provider to not use the resource block's specified project for quota checks.
-# This provider should only be used during project creation and initializing services.
-provider "google-beta" {
-  alias                 = "no_user_project_override"
-  user_project_override = false
-}
 
-# Creates a new Google Cloud project.
-resource "google_project" "default" {
-  provider   = google-beta.no_user_project_override
-  name       = var.project_name
-  project_id = var.project_id
-  # Required for any service that requires the Blaze pricing plan
-  # (like Firebase Authentication with GCIP)
-  # billing_account = var.billing_account
+# # Configures the provider to use the resource block's specified project for quota checks.
+# provider "google-beta" {
+#   user_project_override = true
+# }
 
-  # Required for the project to display in any list of Firebase projects.
-  labels = {
-    "firebase" = "enabled"
-  }
-}
+# # Configures the provider to not use the resource block's specified project for quota checks.
+# # This provider should only be used during project creation and initializing services.
+# provider "google-beta" {
+#   alias                 = "no_user_project_override"
+#   user_project_override = false
+# }
+
+# # Creates a new Google Cloud project.
+# resource "google_project" "default" {
+#   provider   = google-beta.no_user_project_override
+#   name       = var.project_name
+#   project_id = var.project_id
+#   # Required for any service that requires the Blaze pricing plan
+#   # (like Firebase Authentication with GCIP)
+#   # billing_account = var.billing_account
+
+#   # Required for the project to display in any list of Firebase projects.
+#   labels = {
+#     "firebase" = "enabled"
+#   }
+# }
 
 # Enables required APIs.
 resource "google_project_service" "default" {
