@@ -1,7 +1,7 @@
 # Provisions the Firestore database instance.
 resource "google_firestore_database" "default" {
   provider = google-beta
-  project  = google_project.default.project_id
+  project  = var.project_id #google_project.default.project_id
   name     = "(default)"
   # See available locations: https://firebase.google.com/docs/projects/locations#default-cloud-location
   location_id = var.firebase_region_name
@@ -18,7 +18,7 @@ resource "google_firestore_database" "default" {
 # Creates a ruleset of Firestore Security Rules from a local file.
 resource "google_firebaserules_ruleset" "default" {
   provider = google-beta
-  project  = google_project.default.project_id
+  project  = var.project_id #google_project.default.project_id
   source {
     files {
       name = "firestore.rules"
@@ -39,7 +39,7 @@ resource "google_firebaserules_release" "default" {
   provider     = google-beta
   name         = "cloud.firestore" # must be cloud.firestore
   ruleset_name = google_firebaserules_ruleset.default.name
-  project      = google_project.default.project_id
+  project      = var.project_id #google_project.default.project_id
 
   # Wait for Firestore to be provisioned before releasing the ruleset.
   depends_on = [
@@ -50,7 +50,7 @@ resource "google_firebaserules_release" "default" {
 # Adds a new Firestore index.
 resource "google_firestore_index" "indexes" {
   provider = google-beta
-  project  = google_project.default.project_id
+  project  = var.project_id #google_project.default.project_id
 
   collection  = "users"
   query_scope = "COLLECTION"

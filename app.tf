@@ -2,7 +2,7 @@
 # Enables Firebase services for the new project created in main.tf.
 resource "google_firebase_project" "default" {
   provider = google-beta
-  project  = google_project.default.project_id
+  project  = var.project_id #google_project.default.project_id
 
   # Waits for the required APIs to be enabled.
   depends_on = [
@@ -14,7 +14,7 @@ resource "google_firebase_project" "default" {
 resource "google_firebase_android_app" "default" {
   provider = google-beta
 
-  project      = google_project.default.project_id
+  project      = var.project_id #google_project.default.project_id
   display_name = var.android_app_display_name
   package_name = var.android_app_package_name
 
@@ -29,7 +29,7 @@ resource "google_firebase_android_app" "default" {
 resource "google_firebase_apple_app" "default" {
   provider = google-beta
 
-  project      = google_project.default.project_id
+  project      = var.project_id #google_project.default.project_id
   display_name = var.ios_app_display_name
   bundle_id    = var.ios_app_bundle_id
 
@@ -42,7 +42,7 @@ resource "google_firebase_apple_app" "default" {
 # Creates a Firebase Web App in the new project created above.
 resource "google_firebase_web_app" "default" {
   provider     = google-beta
-  project      = google_project.default.project_id
+  project      = var.project_id #google_project.default.project_id
   display_name = var.web_app_display_name
 
   # The other App types (Android and Apple) use "DELETE" by default.

@@ -10,7 +10,7 @@ terraform {
 
 # Configures the provider to use the resource block's specified project for quota checks.
 provider "google-beta" {
-  project = var.project_id  # Use your existing project ID here
+  project               = var.project_id # Use your existing project ID here
   user_project_override = true
 }
 
@@ -45,7 +45,7 @@ provider "google-beta" {
 # Enables required APIs.
 resource "google_project_service" "default" {
   provider = google-beta.no_user_project_override
-  project  = google_project.default.project_id
+  project  = var.project_id #google_project.default.project_id
   for_each = toset([
     "cloudbilling.googleapis.com",
     "cloudresourcemanager.googleapis.com",

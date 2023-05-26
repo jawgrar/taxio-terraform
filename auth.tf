@@ -2,7 +2,7 @@
 # Also enables Firebase Authentication with Identity Platform in the project if not.
 resource "google_identity_platform_config" "auth" {
   provider = google-beta
-  project  = google_project.default.project_id
+  project  = var.project_id #google_project.default.project_id
 
   # For example, you can configure to auto-delete Anonymous users.
   autodelete_anonymous_users = true
@@ -16,7 +16,7 @@ resource "google_identity_platform_config" "auth" {
 # Adds more configurations, like for the email/password sign-in provider.
 resource "google_identity_platform_project_default_config" "auth" {
   provider = google-beta
-  project  = google_project.default.project_id
+  project  = var.project_id #google_project.default.project_id
   sign_in {
     allow_duplicate_emails = false
 
